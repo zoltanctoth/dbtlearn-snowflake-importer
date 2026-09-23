@@ -15,7 +15,7 @@ _Only execute these commands if you decided to skip the Automated Snowflake Setu
 Resources presented:
 * [Snowflake Key-Pair Authentication page](https://docs.snowflake.com/en/user-guide/key-pair-auth)
 * [PuttyGen for Windows](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-* [AirBnb Source data locations](https://github.com/nordquant/complete-dbt-bootcamp-zero-to-hero/blob/main/_course_resources/source-data-locations.md)
+* [AirBnb Source data locations](https://github.com/zoltanctoth/complete-dbt-bootcamp-zero-to-hero/blob/main/_course_resources/source-data-locations.md)
 
 Copy these SQL statements into a Snowflake Worksheet, fill in the public key, select all and execute them (i.e. pressing the play button).
 
@@ -154,7 +154,7 @@ GRANT SELECT ON FUTURE TABLES IN SCHEMA AIRBNB.DEV to ROLE REPORTER;
 ## dbt installation
 
 * Supported Python Versions: https://docs.getdbt.com/faqs/Core/install-python-compatibility
-* Student Repo: https://github.com/nordquant/dbt-student-repo
+* Student Repo: https://github.com/zoltanctoth/dbt-student-repo
 * uv Installation guide: https://docs.astral.sh/uv/getting-started/installation/
 
 ### uv Environment Setup
@@ -955,7 +955,7 @@ exposures:
 * dbt-expectations: https://github.com/metaplane/dbt-expectations
 
 For the final code in _packages.yml_, _models/schema.yml_ and _models/sources.yml_, please refer to the course's Github repo:
-https://github.com/nordquant/complete-dbt-bootcamp-zero-to-hero
+https://github.com/zoltanctoth/complete-dbt-bootcamp-zero-to-hero
 
 ## Testing a single model
 

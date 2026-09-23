@@ -508,7 +508,7 @@ logger.Formatter = logging.Formatter(
 )
 
 
-GITHUB_REPO_URL = "https://github.com/nordquant/dbtlearn-snowflake-importer"
+GITHUB_REPO_URL = "https://github.com/zoltanctoth/dbtlearn-snowflake-importer"
 
 
 def get_build_info() -> str:
