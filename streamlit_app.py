@@ -762,7 +762,7 @@ def render_credentials_form(key_prefix, submit_label, submit_key):
     return submitted, hostname, username, password, passcode
 
 
-FALLBACK_APP_URL = "https://udemy-dbt-setup.streamlit.app/"
+FALLBACK_APP_URL = "https://dbt-bootcamp-setup.streamlit.app/"
 PRIMARY_HOST = "dbtsetup.nordquant.com"
 
 
