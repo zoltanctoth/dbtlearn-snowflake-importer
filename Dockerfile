@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.13-alpine AS base
+FROM python:3.13-slim AS base
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -7,16 +7,11 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 # Set working directory
 WORKDIR /app
 
-# Install build dependencies (needed for some Python packages)
-RUN apk add --no-cache \
-    gcc \
-    g++ \
-    musl-dev \
-    libffi-dev \
-    openssl-dev \
-    cargo \
-    rust \
-    wget
+# All dependencies ship manylinux wheels (snowflake-connector 5.x has no musl wheels, hence slim
+# instead of alpine). wget is kept for the healthchecks here and in base-infra's docker-compose.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/*
 
 # Stage 1: Install dependencies only
 FROM base AS dependencies
@@ -31,18 +26,16 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Stage 2: Final image
 FROM base AS final
 
+# Create a non-root user (owns /app; --chown below avoids duplicating layers with chown -R)
+RUN useradd --create-home --uid 1000 appuser && \
+    chown appuser:appuser /app
+
 # Copy installed dependencies from previous stage
-COPY --from=dependencies /app/.venv /app/.venv
+COPY --from=dependencies --chown=appuser:appuser /app/.venv /app/.venv
 
 # Copy application code (changes frequently)
-COPY . .
-
-# Make entrypoint executable
-RUN chmod +x /app/entrypoint.sh
-
-# Create a non-root user
-RUN adduser -D -u 1000 appuser && \
-    chown -R appuser:appuser /app
+COPY --chown=appuser:appuser . .
+COPY --chown=appuser:appuser --chmod=755 entrypoint.sh /app/entrypoint.sh
 
 USER appuser
 

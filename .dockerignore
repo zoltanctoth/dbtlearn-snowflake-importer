@@ -51,3 +51,6 @@ test_*.py
 # Requirements (we use pyproject.toml)
 requirements*.txt
 requirements*.in
+
+# Claude Code (local worktrees can be hundreds of MB)
+.claude/

@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Deploy to production server
-        uses: appleboy/ssh-action@v1.2.2
+        uses: appleboy/ssh-action@v1.2.5
         env:
           DRAIN_TIMEOUT: ${{ inputs.drain_timeout || '300' }}
           REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
